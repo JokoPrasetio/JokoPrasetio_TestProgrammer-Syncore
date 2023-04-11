@@ -1,0 +1,46 @@
+1. Menampilkan data member yang berada pada provinsi sumatera utara dan dalam satu kabupaten
+
+Jawaban : SELECT * FROM mst_instansi
+          JOIN mst_kabupaten ON mst_instansi.id_kabupaten = mst_kabupaten.id_kabupaten
+          WHERE mst_kabupaten.id_provinsi = (SELECT id_provinsi FROM mst_provinsi WHERE nama_provinsi = 'SUMATERA UTARA')
+          AND mst_kabupaten.nama_kabupaten IN ('ACEH BARAT', 'PIDIE', 'SIMEULUE', 'ACEH TAMIANG', 'KAB.BENER MERIAH')
+
+2. Menampilkan data provinsi yang tidak ada dalam data member
+
+Jawaban : SELECT * FROM mst_provinsi
+          WHERE mst_provinsi.id_provinsi NOT IN (SELECT id_provinsi FROM mst_instansi)
+
+3 Menampilkan data kabupaten yang tidak ada dalam data member
+
+Jawaban : SELECT * FROM mst_kabupaten
+          WHERE mst_kabupaten.id_kabupaten NOT IN (SELECT id_kabupaten FROM mst_instansi)
+
+4 Menampilkan data kecamatan yang tidak ada dalam data member
+
+Jawaban : SELECT * FROM mst_kecamatan 
+          WHERE mst_kecamatan.id_kecamatan NOT IN (SELECT id_kecamatan FROM mst_instansi)
+
+5. Menampilkan nama member yang terdapat di Kab. Simalungun
+
+Jawaban : SELECT mst_instansi.nama_instansi
+          FROM mst_instansi
+          JOIN mst_kabupaten ON mst_instansi.id_kabupaten = mst_kabupaten.id_kabupaten
+          WHERE mst_kabupaten.nama_kabupaten = 'KAB. SIMALUNGUN'
+
+6. Menampilkan jumlah data instansi pada Kab. Bireuen dan Kab. Bener Meriah
+
+Jawaban : SELECT mst_kabupaten.nama_kabupaten, COUNT(*) AS  
+          jumlah_instansi FROM mst_instansi
+          JOIN mst_kabupaten ON mst_instansi.id_kabupaten = mst_kabupaten.id_kabupaten
+          WHERE mst_kabupaten.nama_kabupaten IN ('KAB. BIREUEN', ' KAB. BENER MERIAH')
+          GROUP BY mst_kabupaten.nama_kabupaten
+
+7. Menampilkan data member yang berawalan huruf “M”
+
+Jawaban : SELECT * FROM mst_instansi
+          WHERE nama_instansi LIKE 'M%'
+
+
+
+
+
